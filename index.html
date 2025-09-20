@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Molfa Embroidery</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+
+<header class="bg-indigo-600 text-white py-4 shadow-md text-center">
+  <h1 class="text-2xl font-bold">Molfa Embroidery</h1>
+  <p class="text-sm">موقع تحويل الصور إلى مخطط تطريز تجريبي</p>
+</header>
+
+<main class="container mx-auto p-6">
+  <div class="bg-white rounded-xl shadow-lg p-6 space-y-4">
+
+    <!-- رفع صورة -->
+    <div>
+      <label class="block mb-2 font-medium">اختر صورة</label>
+      <input id="file" type="file" accept="image/*"
+        class="w-full border border-gray-300 rounded-lg p-2"/>
+    </div>
+
+    <!-- إعدادات -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div>
+        <label class="block mb-1">حجم الغرزة (px)</label>
+        <input id="cell" type="number" value="6" min="2" max="40"
+          class="w-full border border-gray-300 rounded-lg p-2"/>
+      </div>
+      <div>
+        <label class="block mb-1">عتبة اللون</label>
+        <input id="th" type="number" value="140" min="0" max="255"
+          class="w-full border border-gray-300 rounded-lg p-2"/>
+      </div>
+      <div>
+        <label class="block mb-1">عدد الألوان</label>
+        <input id="colors" type="number" value="1" min="1" max="8"
+          class="w-full border border-gray-300 rounded-lg p-2"/>
+      </div>
+    </div>
+
+    <!-- أزرار -->
+    <div class="flex gap-3">
+      <button id="make"
+        class="flex-1 bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700">
+        🔧 توليد
+      </button>
+      <button id="downloadDst" style="display:none"
+        class="flex-1 bg-green-600 text-white py-2 rounded-lg hover:bg-green-700">
+        ⬇️ تحميل DST
+      </button>
+      <button id="downloadSvg" style="display:none"
+        class="flex-1 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700">
+        ⬇️ تحميل SVG
+      </button>
+    </div>
+
+    <!-- مؤشر انتظار -->
+    <div id="spinner" class="hidden text-center py-4">
+      <svg class="animate-spin h-8 w-8 text-indigo-600 mx-auto"
+        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10"
+          stroke="currentColor" stroke-width="4"></circle>
+        <path class="opacity-75" fill="currentColor"
+          d="M4 12a8 8 0 018-8v8H4z"></path>
+      </svg>
+      <p class="mt-2 text-sm">جاري المعالجة ...</p>
+    </div>
+
+    <!-- معاينة -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="bg-gray-50 rounded-lg p-2 text-center">
+        <h3 class="font-bold mb-2">الصورة الأصلية</h3>
+        <img id="orig" class="mx-auto max-h-64 object-contain"/>
+      </div>
+      <div class="bg-gray-50 rounded-lg p-2 text-center">
+        <h3 class="font-bold mb-2">معاينة المخطط</h3>
+        <div id="svgPreview" class="overflow-auto max-h-64"></div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<script src="main.js"></script>
+</body>
+</html>
